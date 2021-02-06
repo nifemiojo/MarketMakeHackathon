@@ -1,6 +1,8 @@
 # Class that executes the main script
-from .account import Account
-from .user import User
+from account.account import Account
+from user.user  import User
+from web3 import Web3
+import sys
 
 class Main:
 
@@ -9,9 +11,28 @@ class Main:
 
         # Define ganache endpoint
         ganacheUrl = "http://127.0.0.1:7545"
-        #Mainet infura endpoinnt
-        infura_url = "https://mainnet.infura.io/v3/e84a16c980ca45c8a3e33da73f2a1bf3"
+        # Mainet infura endpoinnt
+        mainnet_infura_url = "https://mainnet.infura.io/v3/548d364006b94801b8cb992b70abbf13"
+        # Kovan infura endpoinnt
+        kovan_infura_url = "https://kovan.infura.io/v3/548d364006b94801b8cb992b70abbf13"
 
+        # One web3Instance per user
+        web3Instance = Web3(Web3.HTTPProvider(kovan_infura_url))
+
+        
+        myKovanAddress = "0x51B7d41aD7Ef02805a0aAa6d62c571799c3D27b2"
+        myKovanAccount = Account(myKovanAddress, web3Instance)
+        myKovanAccount.name = "Femi's Kovan Account 1"
+
+        """         print("Balances")
+            print("-----------")
+            print(f"{myKovanAccount.name}: {myKovanAccount.getBalance()} ether")
+            print("") """
+
+        myKovanAccount.depositFundsToAave("AAVE", 0.05)
+
+        sys.exit()
+        
 
         # Get User Public Key
         try:
@@ -26,7 +47,7 @@ class Main:
         accounts = []
         for i in range(numberOfAccounts):
             address = input("Please enter public key address:\n")
-            accounts.append(Account(address, ganacheUrl))
+            accounts.append(Account(address, web3Instance))
 
         list(map(
                 lambda x: print(f"Your account balance is: {x.getBalance()} ether"),
@@ -45,7 +66,7 @@ class Main:
             favourites.append(data)
 
         # Instantaite User Objects
-        user = User(favourites, infura_url)
+        user = User(favourites, mainnet_infura_url)
         prices = user.getPrices()
         print(prices)
 
