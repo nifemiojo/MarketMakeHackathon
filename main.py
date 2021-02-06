@@ -20,7 +20,7 @@ class Main:
         web3Instance = Web3(Web3.HTTPProvider(kovan_infura_url))
 
         
-        myKovanAddress = "0x51B7d41aD7Ef02805a0aAa6d62c571799c3D27b2"
+        myKovanAddress = ""
         myKovanAccount = Account(myKovanAddress, web3Instance)
         myKovanAccount.name = "Femi's Kovan Account 1"
 
