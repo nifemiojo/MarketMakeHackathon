@@ -106,8 +106,6 @@ class Aave:
         
         txHash = self.sendSignedTx(depositTx)
 
-        print(self.web3Instance.toHex(txHash))
-
         return txHash
 
         #print(lendingPoolContractInstance.functions.deposit(reserveAssetAddress, tx["value"]))

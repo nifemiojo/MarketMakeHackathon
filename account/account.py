@@ -5,11 +5,10 @@ from .aave.aave import Aave
 class Account:
 
     # Set up web3 connection
-    def __init__(self, address, web3Instance):
+    def __init__(self, address, name, web3Instance):
         self.address = address
-        self.name = address
+        self.name = name
         self.web3Instance = web3Instance
-
 
     def getBalance(self):
         # Using web3.py
@@ -21,6 +20,8 @@ class Account:
     def depositFundsToAave(self, asset, amount):
         aave = Aave(self.web3Instance)
         txHash = aave.depositToLendingPoolContract(self.address, amount, asset)
+
+        return txHash
 
     def withdrawFundsFromAave(self):
         # TODO
