@@ -9,3 +9,6 @@ Currently, a terminal application that leverages the web3.py library. Next steps
 1. Complete Integration with AAVE API
 2. Add database functionality for persistent data storage
 3. An easy to use UI
+
+## Video Demo
+[Here](https://youtu.be/NEW70Bx8piI)
